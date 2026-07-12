@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Học Từ Vựng Lớp 8 - Full 12 Unit</title>
+    <!-- Tích hợp Google Font Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --zalo-color: #0068ff;
+            --fb-color: #1877f2;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Nunito', sans-serif;
             background: linear-gradient(135deg, #e0eafc, #cfdef3);
             display: flex;
             justify-content: center;
@@ -27,13 +37,16 @@
         h1 {
             color: #2c3e50;
             margin-bottom: 5px;
-            font-size: 24px;
+            font-size: 26px;
+            font-weight: 800;
+            text-transform: uppercase;
         }
         h2 {
             color: #7f8c8d;
-            font-size: 16px;
+            font-size: 18px;
             margin-top: 0;
             margin-bottom: 20px;
+            font-weight: 600;
         }
         .unit-selector-box {
             background-color: #e8f4fd;
@@ -43,11 +56,13 @@
             border: 1px solid #bce0fd;
         }
         label {
-            font-weight: bold;
+            font-weight: 700;
             color: #2980b9;
             margin-right: 10px;
+            text-transform: capitalize;
         }
         select {
+            font-family: 'Nunito', sans-serif;
             padding: 8px 15px;
             font-size: 15px;
             border-radius: 6px;
@@ -55,18 +70,22 @@
             outline: none;
             background-color: white;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
             max-width: 100%;
+            color: #2c3e50;
         }
         .score-board {
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
-            font-weight: bold;
+            font-weight: 700;
             color: #34495e;
             background: #f8f9fa;
             padding: 10px 15px;
             border-radius: 8px;
+        }
+        .score-board span {
+            text-transform: capitalize;
         }
         .question-box {
             background-color: #f1f2f6;
@@ -78,16 +97,16 @@
         .question-type {
             font-size: 14px;
             color: #e67e22;
-            text-transform: uppercase;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-weight: 800;
+            margin-bottom: 8px;
         }
         .question-text {
-            font-size: 22px;
+            font-size: 24px;
             color: #2c3e50;
-            font-weight: bold;
+            font-weight: 800;
         }
         input[type="text"] {
+            font-family: 'Nunito', sans-serif;
             width: 80%;
             padding: 12px 20px;
             font-size: 16px;
@@ -96,20 +115,24 @@
             margin-bottom: 15px;
             outline: none;
             transition: border-color 0.3s;
+            font-weight: 600;
+            text-align: center;
         }
         input[type="text"]:focus {
             border-color: #3498db;
         }
         button {
+            font-family: 'Nunito', sans-serif;
             background-color: #2ecc71;
             color: white;
             border: none;
             padding: 12px 25px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 700;
             border-radius: 8px;
             cursor: pointer;
             transition: background 0.2s;
+            text-transform: capitalize;
         }
         button:hover {
             background-color: #27ae60;
@@ -140,14 +163,17 @@
             margin-top: 10px;
             padding-top: 10px;
             border-top: 1px dashed #aaa;
-            font-size: 14px;
+            font-size: 15px;
+        }
+        .examples strong {
+            text-transform: capitalize;
         }
         .example-item {
             margin-bottom: 8px;
             line-height: 1.4;
         }
         .example-en {
-            font-weight: bold;
+            font-weight: 700;
             color: #2980b9;
         }
         .example-vi {
@@ -164,21 +190,88 @@
         }
         .empty-pool-msg {
             color: #c0392b;
-            font-weight: bold;
+            font-weight: 700;
             font-style: italic;
+        }
+
+        /* --- CSS Khối liên hệ tích hợp từ file mới --- */
+        .contact-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #e2e8f0;
+            text-align: center;
+        }
+        .contact-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-weight: 800;
+            text-transform: capitalize;
+        }
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .btn-social {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-zalo {
+            color: var(--zalo-color);
+            border: 2px solid var(--zalo-color);
+        }
+        .btn-zalo:hover {
+            background-color: var(--zalo-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 104, 255, 0.2);
+        }
+        .zalo-logo {
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+        }
+        .btn-fb {
+            color: var(--fb-color);
+            border: 2px solid var(--fb-color);
+        }
+        .btn-fb:hover {
+            background-color: var(--fb-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(24, 119, 242, 0.2);
+        }
+        .fb-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--fb-color);
+            transition: fill 0.3s;
+        }
+        .btn-fb:hover .fb-icon {
+            fill: white;
         }
     </style>
 </head>
 <body>
 
 <div class="game-container">
-    <h1>🎯TỪ VỰNG TIẾNG ANH 8</h1>
+    <h1>🎯 Từ Vựng Tiếng Anh 8</h1>
     <h2>Global Success</h2>
 
     <div class="unit-selector-box">
-        <label for="unit-select">📚 Chọn bài học:</label>
+        <label for="unit-select">📚 Chọn Bài Học:</label>
         <select id="unit-select" onchange="changeUnit()">
-            <option value="all">-- Tất cả các bài (Unit 1 - 12) --</option>
+            <option value="all">-- Tất Cả Các Bài (Unit 1 - 12) --</option>
             <option value="1">Unit 1: Leisure Time</option>
             <option value="2">Unit 2: Life in the Countryside</option>
             <option value="3">Unit 3: Teenagers</option>
@@ -196,41 +289,48 @@
 
     <div class="score-board">
         <span>Đúng: <span id="score-correct">0</span></span>
-        <span>Số câu đã làm: <span id="score-total">0</span></span>
+        <span>Số Câu Đã Làm: <span id="score-total">0</span></span>
     </div>
 
     <div class="question-box">
-        <div class="question-type" id="q-type">Hệ thống bài học</div>
-        <div class="question-text" id="q-text">Vui lòng thêm từ vựng để bắt đầu</div>
+        <div class="question-type" id="q-type">Hệ Thống Bài Học</div>
+        <div class="question-text" id="q-text">Vui Lòng Thêm Từ Vựng Để Bắt Đầu</div>
     </div>
 
     <input type="text" id="user-input" placeholder="Nhập đáp án của bạn vào đây..." autocomplete="off">
     <br>
-    <button id="submit-btn" onclick="checkAnswer()">Kiểm tra</button>
-    <button id="next-btn" onclick="nextQuestion()">Câu tiếp theo ➡️</button>
+    <button id="submit-btn" onclick="checkAnswer()">Kiểm Tra</button>
+    <button id="next-btn" onclick="nextQuestion()">Câu Tiếp Theo ➡️</button>
 
     <div class="result-box" id="result-box">
-        <div id="result-message" style="font-weight: bold; font-size: 16px; margin-bottom: 5px;"></div>
+        <div id="result-message" style="font-weight: 700; font-size: 16px; margin-bottom: 5px;"></div>
         <div class="examples" id="examples-box">
-            <strong>💡 Ví dụ minh họa:</strong>
+            <strong>💡 Ví Dụ Minh Họa:</strong>
             <div id="examples-list"></div>
         </div>
     </div>
+
+    <!-- Khối liên hệ chuẩn từ file mới -->
+    <section class="contact-section">
+        <h3>Kết Nối Với Thầy Danh</h3>
+        <div class="social-buttons">
+            <a href="https://zalo.me/0911594794" target="_blank" class="btn-social btn-zalo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="zalo-logo">
+                Zalo: 0911594794
+            </a>
+            
+            <a href="https://www.facebook.com/cong.danh.0210" target="_blank" class="btn-social btn-fb">
+                <svg class="fb-icon" viewBox="0 0 24 24">
+                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                </svg>
+                Facebook
+            </a>
+        </div>
+    </section>
 </div>
 
 <script>
-    // Cấu trúc dữ liệu phân tách từ Unit 1 đến Unit 12
-    // Bạn hãy chèn các từ vựng theo mẫu bên dưới vào các dấu ngoặc vuông [] tương ứng.
     const vocabularyData = {
-            /* Mẫu chèn từ vựng:
-            {
-                en: "leisure activity", vi: "hoạt động giải trí",
-                examples: [
-                    {en: "Swimming is my favorite leisure activity.", vi: "Bơi lội là hoạt động giải trí yêu thích của tôi."},
-                    {en: "Playing chess is a healthy leisure activity.", vi: "Chơi cờ vua là một hoạt động giải trí lành mạnh."}
-                ]
-            }
-            */
       1: [
             {
                 en: "leisure activity", vi: "hoạt động giải trí",
@@ -552,15 +652,7 @@
                 ]
             }
         ],
-        4: [],
-        5: [],
-        6: [],
-        7: [],
-        8: [],
-        9: [],
-        10: [],
-        11: [],
-        12: []
+        4: [], 5: [], 6: [], 7: [], 8: [], 9: [], 10: [], 11: [], 12: []
     };
 
     let activePool = []; 
@@ -633,7 +725,7 @@
         const textLabel = document.getElementById("q-text");
 
         if (activePool.length === 0) {
-            typeLabel.innerText = "Thông báo";
+            typeLabel.innerText = "Thông Báo";
             textLabel.innerHTML = "<span class='empty-pool-msg'>Unit này chưa được thêm dữ liệu từ vựng!</span>";
             document.getElementById("user-input").disabled = true;
             return;
@@ -654,10 +746,10 @@
         questionDirection = Math.random() < 0.5 ? "en_to_vi" : "vi_to_en";
 
         if (questionDirection === "en_to_vi") {
-            typeLabel.innerText = "Hãy dịch từ này sang Tiếng Việt:";
+            typeLabel.innerText = "Hãy Dịch Từ Này Sang Tiếng Việt:";
             textLabel.innerText = currentItem.en;
         } else {
-            typeLabel.innerText = "Hãy dịch từ này sang Tiếng Anh:";
+            typeLabel.innerText = "Hãy Dịch Từ Này Sang Tiếng Anh:";
             textLabel.innerText = currentItem.vi;
         }
     }
@@ -702,19 +794,18 @@
         if (status === "exact") {
             correctCount++;
             resultBox.className = "result-box success";
-            resultMessage.innerHTML = "🎉 Hoàn toàn chính xác! Xuất sắc!";
+            resultMessage.innerHTML = "🎉 Hoàn Toàn Chính Xác! Xuất Sắc!";
         } else if (status === "near") {
             correctCount++; 
             resultBox.className = "result-box warning";
-            resultMessage.innerHTML = `👍 Gần chính xác! Bạn gõ nhầm một chút. Đáp án chuẩn là: <strong>${targetWord}</strong>`;
+            resultMessage.innerHTML = `👍 Gần Chính Xác! Bạn gõ nhầm một chút. Đáp án chuẩn là: <strong>${targetWord}</strong>`;
         } else {
             resultBox.className = "result-box error";
-            resultMessage.innerHTML = `❌ Chưa chính xác rồi! Đáp án chính xác là: <strong>${targetWord}</strong>`;
+            resultMessage.innerHTML = `❌ Chưa Chính Xác Rồi! Đáp án chính xác là: <strong>${targetWord}</strong>`;
         }
 
         document.getElementById("score-correct").innerText = correctCount;
 
-        // Tạo danh sách ví dụ minh họa
         examplesList.innerHTML = "";
         if (currentItem.examples && currentItem.examples.length > 0) {
             currentItem.examples.forEach(ex => {
@@ -735,5 +826,6 @@
     window.onload = changeUnit;
 </script>
 
+</div>
 </body>
 </html>
