@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Học Từ Vựng Lớp 8 - Full 12 Unit</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .game-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 24px;
+        }
+        h2 {
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .unit-selector-box {
+            background-color: #e8f4fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #bce0fd;
+        }
+        label {
+            font-weight: bold;
+            color: #2980b9;
+            margin-right: 10px;
+        }
+        select {
+            padding: 8px 15px;
+            font-size: 15px;
+            border-radius: 6px;
+            border: 2px solid #3498db;
+            outline: none;
+            background-color: white;
+            cursor: pointer;
+            font-weight: 500;
+            max-width: 100%;
+        }
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #34495e;
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+        .question-box {
+            background-color: #f1f2f6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #3498db;
+        }
+        .question-type {
+            font-size: 14px;
+            color: #e67e22;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .question-text {
+            font-size: 22px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #3498db;
+        }
+        button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #27ae60;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            text-align: left;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .examples {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #aaa;
+            font-size: 14px;
+        }
+        .example-item {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .example-en {
+            font-weight: bold;
+            color: #2980b9;
+        }
+        .example-vi {
+            color: #555;
+            font-style: italic;
+        }
+        #next-btn {
+            background-color: #3498db;
+            margin-top: 15px;
+            display: none;
+        }
+        #next-btn:hover {
+            background-color: #2980b9;
+        }
+        .empty-pool-msg {
+            color: #c0392b;
+            font-weight: bold;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>🎯 VỰNG TIẾNG ANH 8</h1>
+    <h2>Global Success</h2>
+
+    <div class="unit-selector-box">
+        <label for="unit-select">📚 Chọn bài học:</label>
+        <select id="unit-select" onchange="changeUnit()">
+            <option value="all">-- Tất cả các bài (Unit 1 - 12) --</option>
+            <option value="1">Unit 1: Leisure Time</option>
+            <option value="2">Unit 2: Life in the Countryside</option>
+            <option value="3">Unit 3: Teenagers</option>
+            <option value="4">Unit 4: Ethnic Groups of Viet Nam</option>
+            <option value="5">Unit 5: Our Customs and Traditions</option>
+            <option value="6">Unit 6: Lifestyles</option>
+            <option value="7">Unit 7: Environmental Protection</option>
+            <option value="8">Unit 8: Shopping</option>
+            <option value="9">Unit 9: Natural Disasters</option>
+            <option value="10">Unit 10: Communication in the Future</option>
+            <option value="11">Unit 11: Science and Technology</option>
+            <option value="12">Unit 12: Life on Other Planets</option>
+        </select>
+    </div>
+
+    <div class="score-board">
+        <span>Đúng: <span id="score-correct">0</span></span>
+        <span>Số câu đã làm: <span id="score-total">0</span></span>
+    </div>
+
+    <div class="question-box">
+        <div class="question-type" id="q-type">Hệ thống bài học</div>
+        <div class="question-text" id="q-text">Vui lòng thêm từ vựng để bắt đầu</div>
+    </div>
+
+    <input type="text" id="user-input" placeholder="Nhập đáp án của bạn vào đây..." autocomplete="off">
+    <br>
+    <button id="submit-btn" onclick="checkAnswer()">Kiểm tra</button>
+    <button id="next-btn" onclick="nextQuestion()">Câu tiếp theo ➡️</button>
+
+    <div class="result-box" id="result-box">
+        <div id="result-message" style="font-weight: bold; font-size: 16px; margin-bottom: 5px;"></div>
+        <div class="examples" id="examples-box">
+            <strong>💡 Ví dụ minh họa:</strong>
+            <div id="examples-list"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Cấu trúc dữ liệu phân tách từ Unit 1 đến Unit 12
+    // Bạn hãy chèn các từ vựng theo mẫu bên dưới vào các dấu ngoặc vuông [] tương ứng.
+    const vocabularyData = {
+            /* Mẫu chèn từ vựng:
+            {
+                en: "leisure activity", vi: "hoạt động giải trí",
+                examples: [
+                    {en: "Swimming is my favorite leisure activity.", vi: "Bơi lội là hoạt động giải trí yêu thích của tôi."},
+                    {en: "Playing chess is a healthy leisure activity.", vi: "Chơi cờ vua là một hoạt động giải trí lành mạnh."}
+                ]
+            }
+            */
+      1: [
+            {
+                en: "leisure activity", vi: "hoạt động giải trí",
+                examples: [
+                    {en: "Swimming is my favorite leisure activity.", vi: "Bơi lội là hoạt động giải trí yêu thích của tôi."},
+                    {en: "Do you prefer sports or other leisure activities?", vi: "Bạn thích thể thao hay các hoạt động giải trí khác hơn?"}
+                ]
+            },
+            {
+                en: "surf the net", vi: "lướt mạng",
+                examples: [
+                    {en: "He spends two hours every day to surf the net.", vi: "Anh ấy dành hai tiếng mỗi ngày để lướt mạng."},
+                    {en: "My mother uses her smartphone to surf the net for news.", vi: "Mẹ tôi dùng điện thoại thông minh để lướt mạng đọc tin tức."}
+                ]
+            },
+            {
+                en: "message friends", vi: "nhắn tin cho bạn bè",
+                examples: [
+                    {en: "She loves to message friends on Zalo after school.", vi: "Cô ấy thích nhắn tin cho bạn bè trên Zalo sau giờ học."},
+                    {en: "Instead of calling, teenagers prefer to message friends.", vi: "Thay vì gọi điện, giới trẻ thích nhắn tin cho bạn bè hơn."}
+                ]
+            },
+            {
+                en: "do DIY", vi: "tự làm đồ tự chế",
+                examples: [
+                    {en: "She loves to do DIY projects in her free time.", vi: "Cô ấy thích tự làm các dự án tự chế vào thời gian rảnh."},
+                    {en: "We can save money if we do DIY home repairs.", vi: "Chúng ta có thể tiết kiệm tiền nếu tự sửa chữa nhà cửa."}
+                ]
+            },
+            {
+                en: "origami", vi: "nghệ thuật gấp giấy nhật bản",
+                examples: [
+                    {en: "My sister is making a paper crane using origami.", vi: "Em gái tôi đang gấp một con hạc giấy bằng nghệ thuật origami."},
+                    {en: "Learning origami requires a lot of patience.", vi: "Học gấp giấy origami đòi hỏi rất nhiều sự kiên nhẫn."}
+                ]
+            },
+            {
+                en: "snowboarding", vi: "trượt tuyết bằng ván",
+                examples: [
+                    {en: "Snowboarding is a very popular winter sport.", vi: "Trượt tuyết bằng ván là một môn thể thao mùa đông rất phổ biến."},
+                    {en: "He hurt his leg while he was snowboarding.", vi: "Anh ấy bị thương ở chân khi đang trượt tuyết bằng ván."}
+                ]
+            },
+            {
+                en: "muscle strength", vi: "sức mạnh cơ bắp",
+                examples: [
+                    {en: "Lifting weights can help improve your muscle strength.", vi: "Nâng tạ có thể giúp cải thiện sức mạnh cơ bắp của bạn."},
+                    {en: "Push-ups are great for building muscle strength.", vi: "Chống đẩy rất tuyệt vời để xây dựng sức mạnh cơ bắp."}
+                ]
+            },
+            {
+                en: "connect with", vi: "kết nối với",
+                examples: [
+                    {en: "Social media helps us connect with people around the world.", vi: "Mạng xã hội giúp chúng ta kết nối với mọi người trên thế giới."},
+                    {en: "Leisure activities help family members connect with each other.", vi: "Các hoạt động giải trí giúp các thành viên gia đình kết nối với nhau."}
+                ]
+            },
+            {
+                en: "recipe", vi: "công thức nấu ăn",
+                examples: [
+                    {en: "Can you share the recipe for this delicious cake?", vi: "Bạn có thể chia sẻ công thức nấu món bánh ngon này không?"},
+                    {en: "I followed the recipe closely, but it didn't taste right.", vi: "Tôi đã làm theo sát công thức nấu ăn, nhưng vị vẫn chưa đúng lắm."}
+                ]
+            },
+            {
+                en: "costume contest", vi: "cuộc thi trang phục",
+                examples: [
+                    {en: "She won first prize in the Halloween costume contest.", vi: "Cô ấy đã giành giải nhất trong cuộc thi trang phục Halloween."},
+                    {en: "Everyone wore creative clothes for the costume contest.", vi: "Mọi người đều mặc quần áo sáng tạo cho cuộc thi trang phục."}
+                ]
+            },
+            {
+                en: "fancy", vi: "thích",
+                examples: [
+                    {en: "Do you fancy going for a walk in the park?", vi: "Bạn có thích đi dạo trong công viên không?"},
+                    {en: "I don't fancy eating fish tonight.", vi: "Tối nay tôi không thích ăn cá lắm."}
+                ]
+            },
+            {
+                en: "detest", vi: "ghét cay ghét đắng",
+                examples: [
+                    {en: "They detest doing homework on weekends.", vi: "Họ ghét cay ghét đắng việc làm bài tập về nhà vào cuối tuần."},
+                    {en: "I detest people who are always late for class.", vi: "Tôi ghét cay ghét đắng những người luôn đến lớp muộn."}
+                ]
+            },
+            {
+                en: "hang out", vi: "đi chơi",
+                examples: [
+                    {en: "Teenagers like to hang out at the shopping mall.", vi: "Thanh thiếu niên thích đi chơi ở trung tâm thương mại."},
+                    {en: "Who do you usually hang out with on Sundays?", vi: "Bạn thường đi chơi cùng với ai vào các ngày Chủ nhật?"}
+                ]
+            },
+            {
+                en: "balance", vi: "cân bằng",
+                examples: [
+                    {en: "It is important to keep a balance between study and play.", vi: "Điều quan trọng là phải giữ cân bằng giữa việc học và chơi."},
+                    {en: "You need to balance your time wisely.", vi: "Bạn cần phải cân bằng thời gian của mình một cách khôn ngoan."}
+                ]
+            },
+            {
+                en: "crucial", vi: "quan trọng",
+                examples: [
+                    {en: "Relaxation is crucial for maintaining good mental health.", vi: "Thư giãn là điều quan trọng để duy trì một sức khỏe tinh thần tốt."},
+                    {en: "Practicing every day plays a crucial role in learning English.", vi: "Luyện tập mỗi ngày đóng vai trò quan trọng trong việc học tiếng Anh."}
+                ]
+            }
+        ],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
+        11: [],
+        12: []
+    };
+
+    let activePool = []; 
+    let currentItem = {};
+    let questionDirection = ""; 
+    let correctCount = 0;
+    let totalCount = 0;
+
+    function changeUnit() {
+        const selectedValue = document.getElementById("unit-select").value;
+        activePool = [];
+
+        if (selectedValue === "all") {
+            for (let key in vocabularyData) {
+                activePool = activePool.concat(vocabularyData[key]);
+            }
+        } else {
+            activePool = vocabularyData[selectedValue] || [];
+        }
+
+        correctCount = 0;
+        totalCount = 0;
+        document.getElementById("score-correct").innerText = correctCount;
+        document.getElementById("score-total").innerText = totalCount;
+
+        nextQuestion();
+    }
+
+    function getLevenshteinDistance(a, b) {
+        const matrix = [];
+        for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+        for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+
+        for (let i = 1; i <= b.length; i++) {
+            for (let j = 1; j <= a.length; j++) {
+                if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                    matrix[i][j] = matrix[i - 1][j - 1];
+                } else {
+                    matrix[i][j] = Math.min(
+                        matrix[i - 1][j - 1] + 1,
+                        matrix[i][j - 1] + 1,
+                        matrix[i - 1][j] + 1
+                    );
+                }
+            }
+        }
+        return matrix[b.length][a.length];
+    }
+
+    function cleanString(str, language = "en") {
+        let cleaned = str.trim().toLowerCase().replace(/\s+/g, ' ');
+        if (language === "vi") {
+            cleaned = cleaned.replace(/^(sự|việc|cuộc|cái|đang|những)\s+/g, '');
+        }
+        return cleaned;
+    }
+
+    document.getElementById("user-input").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            if (document.getElementById("submit-btn").style.display !== "none") {
+                checkAnswer();
+            } else {
+                nextQuestion();
+            }
+        }
+    });
+
+    function nextQuestion() {
+        const typeLabel = document.getElementById("q-type");
+        const textLabel = document.getElementById("q-text");
+
+        if (activePool.length === 0) {
+            typeLabel.innerText = "Thông báo";
+            textLabel.innerHTML = "<span class='empty-pool-msg'>Unit này chưa được thêm dữ liệu từ vựng!</span>";
+            document.getElementById("user-input").disabled = true;
+            return;
+        }
+
+        document.getElementById("result-box").style.display = "none";
+        document.getElementById("next-btn").style.display = "none";
+        document.getElementById("submit-btn").style.display = "inline-block";
+        
+        const inputField = document.getElementById("user-input");
+        inputField.value = "";
+        inputField.disabled = false;
+        inputField.focus();
+
+        const randomIndex = Math.floor(Math.random() * activePool.length);
+        currentItem = activePool[randomIndex];
+
+        questionDirection = Math.random() < 0.5 ? "en_to_vi" : "vi_to_en";
+
+        if (questionDirection === "en_to_vi") {
+            typeLabel.innerText = "Hãy dịch từ này sang Tiếng Việt:";
+            textLabel.innerText = currentItem.en;
+        } else {
+            typeLabel.innerText = "Hãy dịch từ này sang Tiếng Anh:";
+            textLabel.innerText = currentItem.vi;
+        }
+    }
+
+    function checkAnswer() {
+        if (activePool.length === 0) return;
+
+        const rawInput = document.getElementById("user-input").value;
+        if (rawInput.trim() === "") {
+            alert("Vui lòng nhập câu trả lời trước nhé!");
+            return;
+        }
+
+        totalCount++;
+        document.getElementById("score-total").innerText = totalCount;
+
+        const lang = (questionDirection === "en_to_vi") ? "vi" : "en";
+        const targetWord = (questionDirection === "en_to_vi") ? currentItem.vi : currentItem.en;
+        
+        const cleanUser = cleanString(rawInput, lang);
+        const cleanTarget = cleanString(targetWord, lang);
+
+        const distance = getLevenshteinDistance(cleanUser, cleanTarget);
+        const allowedErrorThreshold = Math.max(1, Math.round(cleanTarget.length * 0.2));
+
+        let status = "wrong"; 
+
+        if (cleanUser === cleanTarget) {
+            status = "exact";
+        } else if (distance <= allowedErrorThreshold) {
+            status = "near";
+        }
+
+        const resultBox = document.getElementById("result-box");
+        const resultMessage = document.getElementById("result-message");
+        const examplesList = document.getElementById("examples-list");
+
+        document.getElementById("user-input").disabled = true;
+        document.getElementById("submit-btn").style.display = "none";
+        document.getElementById("next-btn").style.display = "inline-block";
+
+        if (status === "exact") {
+            correctCount++;
+            resultBox.className = "result-box success";
+            resultMessage.innerHTML = "🎉 Hoàn toàn chính xác! Xuất sắc!";
+        } else if (status === "near") {
+            correctCount++; 
+            resultBox.className = "result-box warning";
+            resultMessage.innerHTML = `👍 Gần chính xác! Bạn gõ nhầm một chút. Đáp án chuẩn là: <strong>${targetWord}</strong>`;
+        } else {
+            resultBox.className = "result-box error";
+            resultMessage.innerHTML = `❌ Chưa chính xác rồi! Đáp án chính xác là: <strong>${targetWord}</strong>`;
+        }
+
+        document.getElementById("score-correct").innerText = correctCount;
+
+        // Tạo danh sách ví dụ minh họa
+        examplesList.innerHTML = "";
+        if (currentItem.examples && currentItem.examples.length > 0) {
+            currentItem.examples.forEach(ex => {
+                const item = document.createElement("div");
+                item.className = "example-item";
+                item.innerHTML = `<span class="example-en">• ${ex.en}</span> <br> <span class="example-vi">(${ex.vi})</span>`;
+                examplesList.appendChild(item);
+            });
+            document.getElementById("examples-box").style.display = "block";
+        } else {
+            document.getElementById("examples-box").style.display = "none";
+        }
+
+        resultBox.style.display = "block";
+        document.getElementById("next-btn").focus();
+    }
+
+    window.onload = changeUnit;
+</script>
+
+</body>
+</html>
